@@ -260,7 +260,7 @@ rule filter:
         exclude_where = config["filter"]["exclude_where"],
         min_date = config["filter"]["min_date"],
         ambiguous = lambda wildcards: f"--exclude-ambiguous-dates-by {config['filter']['exclude_ambiguous_dates_by']}" if "exclude_ambiguous_dates_by" in config["filter"] else "",
-        date = date.today().strftime("%Y-%m-%d")
+        date = (date.today() + datetime.timedelta(days=1)).strftime("%Y-%m-%d")
     conda: config["conda_environment"]
     shell:
         """
